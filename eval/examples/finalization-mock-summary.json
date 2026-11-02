@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmarkVersion": "1.0.0",
+  "runId": "2026-11-02T13-30-47-717Z-e3f5d42f",
+  "createdAt": "2026-11-02T13:30:47.754Z",
+  "adapter": "mock",
+  "description": "Actual offline protocol rehearsal on browser-captured synthetic defects. No live model quality was measured.",
+  "configuredModel": "gemini-3.5-flash-lite",
+  "promptVersion": "2.0.0",
+  "fixtureSourceSHA256": "1844abbbc9d0caeb5eaf20281a43e3e803dd6eee5adb1ef2859c02bc2e6b50b0",
+  "capturedBrowser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "actualResults": {
+    "fixtures": 25,
+    "reproduced": 25,
+    "reproductionFailures": 0,
+    "protocolValidResults": 50,
+    "failedResults": 0,
+    "humanQualityScoresAvailable": false,
+    "providerRequests": 0,
+    "reviewPacketItems": 50,
+    "completedHumanReviews": 0
+  },
+  "modelQuality": {
+    "knownCauseIdentifiedFraction": null,
+    "actionability": null,
+    "unsupportedClaims": null,
+    "meanAPILatencyMs": null,
+    "inputTokens": null,
+    "outputTokens": null,
+    "estimatedCostUSD": null
+  },
+  "commands": [
+    "$env:BUGCAPSULE_BROWSER_EXECUTABLE='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'",
+    "pnpm eval:capture --out eval/outputs/final-captures-2026-11-02.json",
+    "pnpm eval:run --captures eval/outputs/final-captures-2026-11-02.json --out eval/outputs/final-mock-2026-11-02",
+    "pnpm eval:review --results eval/outputs/final-mock-2026-11-02/results.json --out eval/outputs/final-mock-2026-11-02/review"
+  ],
+  "expectedSafeguardsVerified": [
+    "Existing capture output was refused rather than overwritten.",
+    "Mock runs were refused by model-quality grading."
+  ],
+  "rawArtifacts": "eval/outputs/final-mock-2026-11-02/results.json (local ignored synthetic artifacts; use a new output path to reproduce)",
+  "limitations": [
+    "No Google request, real token usage, API latency or cost was obtained.",
+    "No independent human quality review was performed.",
+    "Schema/reference validity does not prove a diagnostic cause or fix.",
+    "Synthetic project-authored fixtures do not establish production generalization."
+  ]
+}

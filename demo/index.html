@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BugCapsule • Bug playground</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        background: #101116;
+        color: #edeef6;
+        font-size: 16px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 1040px;
+        margin: auto;
+        padding: 64px 30px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 60px;
+      }
+      .brand {
+        font-size: 20px;
+        font-weight: 750;
+      }
+      .pill {
+        font-size: 12px;
+        border: 1px solid #373449;
+        border-radius: 30px;
+        padding: 8px 12px;
+        color: #bbadff;
+      }
+      h1 {
+        font-size: 48px;
+        letter-spacing: -2px;
+        margin: 12px 0 18px;
+        line-height: 1.1;
+      }
+      p {
+        line-height: 1.65;
+        color: #a5a7b7;
+      }
+      .intro {
+        max-width: 640px;
+        margin-bottom: 38px;
+      }
+      .eyebrow {
+        color: #ad9afc;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .card {
+        background: #191a23;
+        border: 1px solid #2d2e3a;
+        border-radius: 16px;
+        padding: 26px;
+      }
+      .number {
+        font-size: 12px;
+        color: #8d81b9;
+      }
+      h2 {
+        font-size: 19px;
+        letter-spacing: -0.3px;
+      }
+      button {
+        background: #7760db;
+        color: white;
+        border: 1px solid #8b77e4;
+        border-radius: 8px;
+        padding: 11px 16px;
+        font: 600 13px inherit;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #8b72f3;
+      }
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #b6a8fd;
+        outline-offset: 3px;
+      }
+      button.secondary {
+        background: #292a36;
+        border-color: #3b3c4b;
+      }
+      input {
+        display: block;
+        width: 100%;
+        margin: 8px 0 16px;
+        padding: 10px;
+        border: 1px solid #454654;
+        border-radius: 8px;
+        background: #111219;
+        color: #e9e9f2;
+      }
+      label {
+        font-size: 13px;
+        color: #b6b6c7;
+      }
+      output {
+        display: block;
+        margin: 16px 0 0;
+        color: #d8cbff;
+        min-height: 24px;
+        font-size: 14px;
+      }
+      footer {
+        margin-top: 32px;
+        font-size: 13px;
+        color: #858699;
+      }
+      .steps {
+        font-size: 14px;
+        padding-left: 18px;
+        color: #a5a7b7;
+        line-height: 1.8;
+      }
+      @media (max-width: 650px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 36px;
+        }
+        main {
+          padding: 28px 20px;
+        }
+        header {
+          margin-bottom: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="brand">◒ BugCapsule</span
+        ><span class="pill">Local demonstration</span>
+      </header>
+      <div class="intro">
+        <span class="eyebrow">A few bugs. All intentional.</span>
+        <h1>A small playground.<br />A better bug report.</h1>
+        <p>
+          Open BugCapsule from your browser toolbar and start a capture. Then
+          try a scenario below, take a screenshot, and turn what happened into a
+          report.
+        </p>
+      </div>
+      <div class="grid">
+        <section class="card">
+          <span class="number">01 / JAVASCRIPT ERROR</span>
+          <h2>The broken save button</h2>
+          <p>Save a draft. An uncaught error interrupts the operation.</p>
+          <button id="throw-error">Save draft</button
+          ><output id="save-state">Draft has not been saved.</output>
+        </section>
+        <section class="card">
+          <span class="number">02 / PROMISE REJECTION</span>
+          <h2>A request that never resolves</h2>
+          <p>
+            A simulated checkout fails with an unhandled promise rejection. No
+            network request is made.
+          </p>
+          <button id="reject-promise">Try checkout</button
+          ><output id="checkout-state">Ready for checkout.</output>
+        </section>
+        <section class="card">
+          <span class="number">03 / CONSOLE + PRIVACY</span>
+          <h2>Context without the secrets</h2>
+          <p>
+            Log a sample error containing fake sensitive strings and an object.
+            Test that inputs are never tracked.
+          </p>
+          <label for="private-field">Fake private input (demo only)</label
+          ><input
+            id="private-field"
+            type="password"
+            autocomplete="off"
+            placeholder="Type a fake password"
+          /><button id="console-error" class="secondary">
+            Log sample error</button
+          ><output>Only synthetic sample data is used.</output>
+        </section>
+        <section class="card">
+          <span class="number">04 / MULTISTEP UI BUG</span>
+          <h2>The stubborn cart</h2>
+          <ol class="steps">
+            <li>Add an item to the cart.</li>
+            <li>Remove the item.</li>
+            <li>The count incorrectly stays at one.</li>
+          </ol>
+          <button id="add-item">Add item</button>
+          <button id="remove-item" class="secondary">Remove item</button
+          ><output id="cart-state">Cart: 0 items</output>
+        </section>
+      </div>
+      <footer>
+        Capture only starts when you choose. Reloading this page ends the
+        current capture.
+        <a href="#navigation" style="color: #baa9ff"
+          >Try a same-document navigation</a
+        >.
+      </footer>
+    </main>
+    <script>
+      document.querySelector('#throw-error').addEventListener('click', () => {
+        document.querySelector('#save-state').textContent = 'Saving… (stuck)';
+        throw new Error(
+          'Demo: draft save failed — missing document identifier',
+        );
+      });
+      document
+        .querySelector('#reject-promise')
+        .addEventListener('click', () => {
+          document.querySelector('#checkout-state').textContent =
+            'Checkout failed.';
+          void Promise.reject(
+            new Error('Demo: checkout rejected — simulated inventory conflict'),
+          );
+        });
+      document.querySelector('#console-error').addEventListener('click', () => {
+        console.error(
+          'Demo: token=fake-demo-token email=demo@example.test https://example.test/path?secret=fake#private',
+          { password: 'never-serialize-this-object' },
+        );
+      });
+      let items = 0;
+      document.querySelector('#add-item').addEventListener('click', () => {
+        items++;
+        document.querySelector('#cart-state').textContent =
+          `Cart: ${items} items`;
+      });
+      document.querySelector('#remove-item').addEventListener('click', () => {
+        items = Math.max(
+          0,
+          items - 1,
+        ); /* Intentional bug: count is not rendered again. */
+      });
+    </script>
+  </body>
+</html>

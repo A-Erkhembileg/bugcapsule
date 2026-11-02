@@ -1,0 +1,60 @@
+{
+  "name": "bugcapsule",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Privacy-first bug reporting and reproduction toolkit for web developers.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": "^22.13.0 || >=24.0.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "package": "pnpm build && node scripts/package-extension.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "demo": "node demo/server.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "eval:run": "tsx eval/cli.ts run",
+    "eval:review": "tsx eval/cli.ts review",
+    "eval:grade": "tsx eval/cli.ts grade",
+    "eval:capture": "tsx eval/cli.ts capture",
+    "eval:fixtures": "tsx eval/cli.ts serve"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2",
+    "lucide-react": "^0.577.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^3.0.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/vite": "^4.2.0",
+    "@types/chrome": "^0.1.36",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "eslint": "^10.0.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "jsdom": "^28.0.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.2.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.0",
+    "vite": "^8.3.5",
+    "vitest": "^4.0.18"
+  }
+}

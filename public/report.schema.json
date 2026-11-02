@@ -1,0 +1,872 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "expectedBehavior": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "actualBehavior": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "steps": {
+          "maxItems": 50,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "browser": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "viewport": {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100000
+                },
+                "height": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100000
+                },
+                "devicePixelRatio": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "width",
+                "height",
+                "devicePixelRatio"
+              ],
+              "additionalProperties": false
+            },
+            "language": {
+              "type": "string",
+              "maxLength": 80
+            }
+          },
+          "required": [
+            "url",
+            "browser",
+            "viewport",
+            "language"
+          ],
+          "additionalProperties": false
+        },
+        "events": {
+          "maxItems": 200,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "console-error",
+                  "error",
+                  "unhandled-rejection",
+                  "click",
+                  "navigation"
+                ]
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+              },
+              "offsetMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400000
+              },
+              "message": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "source": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000000
+              },
+              "column": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000000
+              },
+              "stack": {
+                "type": "string",
+                "maxLength": 4000
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "timestamp",
+              "offsetMs",
+              "message"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "privacyReviewed": {
+          "type": "boolean"
+        },
+        "aiDiagnostic": {
+          "not": {}
+        },
+        "screenshot": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "const": "screenshot.png"
+            },
+            "mimeType": {
+              "type": "string",
+              "const": "image/png"
+            },
+            "width": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 16384
+            },
+            "height": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 16384
+            },
+            "redacted": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "mimeType",
+            "width",
+            "height",
+            "redacted"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "id",
+        "createdAt",
+        "title",
+        "description",
+        "expectedBehavior",
+        "actualBehavior",
+        "steps",
+        "environment",
+        "events",
+        "privacyReviewed"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "1.1.0"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "expectedBehavior": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "actualBehavior": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "steps": {
+          "maxItems": 50,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "browser": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "viewport": {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100000
+                },
+                "height": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100000
+                },
+                "devicePixelRatio": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "width",
+                "height",
+                "devicePixelRatio"
+              ],
+              "additionalProperties": false
+            },
+            "language": {
+              "type": "string",
+              "maxLength": 80
+            }
+          },
+          "required": [
+            "url",
+            "browser",
+            "viewport",
+            "language"
+          ],
+          "additionalProperties": false
+        },
+        "events": {
+          "maxItems": 200,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "console-error",
+                  "error",
+                  "unhandled-rejection",
+                  "click",
+                  "navigation"
+                ]
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+              },
+              "offsetMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400000
+              },
+              "message": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "source": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000000
+              },
+              "column": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000000
+              },
+              "stack": {
+                "type": "string",
+                "maxLength": 4000
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "timestamp",
+              "offsetMs",
+              "message"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "privacyReviewed": {
+          "type": "boolean"
+        },
+        "aiDiagnostic": {
+          "type": "string",
+          "maxLength": 12000
+        },
+        "screenshot": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "const": "screenshot.png"
+            },
+            "mimeType": {
+              "type": "string",
+              "const": "image/png"
+            },
+            "width": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 16384
+            },
+            "height": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 16384
+            },
+            "redacted": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "mimeType",
+            "width",
+            "height",
+            "redacted"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "id",
+        "createdAt",
+        "title",
+        "description",
+        "expectedBehavior",
+        "actualBehavior",
+        "steps",
+        "environment",
+        "events",
+        "privacyReviewed"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "1.2.0"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "expectedBehavior": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "actualBehavior": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "steps": {
+          "maxItems": 50,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "browser": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "viewport": {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100000
+                },
+                "height": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100000
+                },
+                "devicePixelRatio": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "width",
+                "height",
+                "devicePixelRatio"
+              ],
+              "additionalProperties": false
+            },
+            "language": {
+              "type": "string",
+              "maxLength": 80
+            }
+          },
+          "required": [
+            "url",
+            "browser",
+            "viewport",
+            "language"
+          ],
+          "additionalProperties": false
+        },
+        "events": {
+          "maxItems": 200,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "console-error",
+                  "error",
+                  "unhandled-rejection",
+                  "click",
+                  "navigation"
+                ]
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+              },
+              "offsetMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400000
+              },
+              "message": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "source": {
+                "type": "string",
+                "maxLength": 2048
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000000
+              },
+              "column": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000000
+              },
+              "stack": {
+                "type": "string",
+                "maxLength": 4000
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "timestamp",
+              "offsetMs",
+              "message"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "privacyReviewed": {
+          "type": "boolean"
+        },
+        "aiDiagnostic": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 12000
+            },
+            {
+              "type": "object",
+              "properties": {
+                "summary": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1200
+                },
+                "observations": {
+                  "maxItems": 20,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1000
+                      },
+                      "eventIds": {
+                        "minItems": 1,
+                        "maxItems": 200,
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        }
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "eventIds"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "hypotheses": {
+                  "maxItems": 5,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hypothesisId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      },
+                      "title": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      },
+                      "explanation": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1600
+                      },
+                      "supportingEventIds": {
+                        "minItems": 1,
+                        "maxItems": 200,
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        }
+                      },
+                      "contradictingEventIds": {
+                        "maxItems": 200,
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        }
+                      },
+                      "suggestedFix": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1600
+                      },
+                      "verificationSteps": {
+                        "minItems": 1,
+                        "maxItems": 10,
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        }
+                      },
+                      "uncertaintyNotes": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1000
+                      }
+                    },
+                    "required": [
+                      "hypothesisId",
+                      "title",
+                      "explanation",
+                      "supportingEventIds",
+                      "contradictingEventIds",
+                      "suggestedFix",
+                      "verificationSteps",
+                      "uncertaintyNotes"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "recommendedDebuggingSteps": {
+                  "minItems": 1,
+                  "maxItems": 15,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 500
+                  }
+                },
+                "missingEvidence": {
+                  "maxItems": 12,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 500
+                  }
+                },
+                "limitations": {
+                  "minItems": 1,
+                  "maxItems": 12,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 500
+                  }
+                },
+                "schemaVersion": {
+                  "type": "string",
+                  "const": "1.0.0"
+                },
+                "analysisId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "reportId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "provider": {
+                  "type": "string",
+                  "const": "google-gemini"
+                },
+                "model": {
+                  "type": "string",
+                  "enum": [
+                    "gemini-3.8-flash",
+                    "gemini-3.5-flash-lite"
+                  ]
+                },
+                "promptVersion": {
+                  "type": "string",
+                  "const": "2.0.0"
+                },
+                "generatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                },
+                "evidenceIds": {
+                  "maxItems": 200,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  }
+                },
+                "durationMs": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 86400000
+                },
+                "tokenUsage": {
+                  "type": "object",
+                  "properties": {
+                    "inputTokens": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000000000
+                    },
+                    "outputTokens": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000000000
+                    },
+                    "totalTokens": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000000000
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "summary",
+                "observations",
+                "hypotheses",
+                "recommendedDebuggingSteps",
+                "missingEvidence",
+                "limitations",
+                "schemaVersion",
+                "analysisId",
+                "reportId",
+                "provider",
+                "model",
+                "promptVersion",
+                "generatedAt",
+                "evidenceIds"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "screenshot": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "const": "screenshot.png"
+            },
+            "mimeType": {
+              "type": "string",
+              "const": "image/png"
+            },
+            "width": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 16384
+            },
+            "height": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "maximum": 16384
+            },
+            "redacted": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "mimeType",
+            "width",
+            "height",
+            "redacted"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "id",
+        "createdAt",
+        "title",
+        "description",
+        "expectedBehavior",
+        "actualBehavior",
+        "steps",
+        "environment",
+        "events",
+        "privacyReviewed"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}
