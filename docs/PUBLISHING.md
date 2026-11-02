@@ -6,7 +6,7 @@ The local Git repository uses branch `main` with this configured remote.
 origin  https://github.com/A-Erkhembileg/bugcapsule.git
 ```
 
-The source, documentation and tests are prepared for publication to this existing public repository. The owner approved the v0.3.0 source publication. The source commit preserves the repository's initial history and uses the verified GitHub account's no-reply author address. GitHub CLI is unavailable in the development environment.
+The source, documentation and tests are prepared for publication to this existing public repository. The owner approved the v0.3.0 source publication. The source commit preserves the repository's initial history and uses the authorized GitHub account's configured commit identity. GitHub CLI is unavailable in the development environment.
 
 After reviewing the files, configure your chosen author identity for this repository. Use your GitHub no-reply address if you want your personal email to remain private.
 

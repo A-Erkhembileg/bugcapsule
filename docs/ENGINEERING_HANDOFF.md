@@ -64,4 +64,4 @@ For reproducible experiments, follow [evaluation](EVALUATION.md). Live evaluatio
 
 ## Repository status
 
-The original GitHub remote and initial history are preserved. The owner approved source publication after this handoff was prepared. Publication uses the verified account's GitHub no-reply identity and a normal fast-forward push. A GitHub Release asset or Chrome Web Store submission is a separate distribution step. See [publishing](PUBLISHING.md).
+The original GitHub remote and initial history are preserved. The owner approved source publication after this handoff was prepared. Publication uses the authorized GitHub account's configured commit identity and a normal fast-forward push. A GitHub Release asset or Chrome Web Store submission is a separate distribution step. See [publishing](PUBLISHING.md).
