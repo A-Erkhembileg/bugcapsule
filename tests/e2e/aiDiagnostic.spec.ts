@@ -395,7 +395,26 @@ test('mocked Gemini stays opt-in, excludes private attachments, and saves review
   await expect(
     editor.getByRole('button', { name: 'Export ZIP', exact: true }),
   ).toBeDisabled();
+  // A slow worker acknowledgement must not undo the controlled checkbox click.
+  await editor.evaluate(() => {
+    const sendMessage = chrome.runtime.sendMessage.bind(chrome.runtime);
+    chrome.runtime.sendMessage = (async (message: unknown) => {
+      if (
+        message &&
+        typeof message === 'object' &&
+        'type' in message &&
+        message.type === 'UPDATE_REPORT'
+      ) {
+        chrome.runtime.sendMessage = sendMessage;
+        await new Promise((resolve) => setTimeout(resolve, 300));
+      }
+      return sendMessage(message);
+    }) as typeof chrome.runtime.sendMessage;
+  });
   await review.check();
+  await expect(
+    editor.getByRole('button', { name: 'Export ZIP', exact: true }),
+  ).toBeDisabled();
   await expect(
     editor.getByRole('button', { name: 'Export ZIP', exact: true }),
   ).toBeEnabled();

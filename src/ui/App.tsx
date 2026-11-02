@@ -81,6 +81,7 @@ export function App() {
   const reportId = useRef<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState('');
+  const [privacyReviewPending, setPrivacyReviewPending] = useState<boolean | null>(null);
   const [error, setError] = useState('');
   const [feedback, setFeedback] = useState('');
   const [tab, setTab] = useState<Tab>('details');
@@ -229,6 +230,22 @@ export function App() {
       'Saving',
       'Changes saved locally.',
     );
+  }
+  async function reviewPrivacy(checked: boolean) {
+    if (!draft) return;
+    // Acknowledge the click immediately; export still waits for the saved state.
+    setPrivacyReviewPending(checked);
+    try {
+      await run(
+        {
+          type: 'UPDATE_REPORT',
+          report: { ...draft, privacyReviewed: checked },
+        },
+        'Saving privacy review',
+      );
+    } finally {
+      setPrivacyReviewPending(null);
+    }
   }
   async function screenshot() {
     if (dirty && !(await save())) return;
@@ -777,19 +794,10 @@ export function App() {
                     <label className="review-checkbox">
                       <input
                         type="checkbox"
-                        checked={draft.privacyReviewed}
+                        checked={privacyReviewPending ?? draft.privacyReviewed}
                         disabled={editingDisabled || dirty}
                         onChange={(event) => {
-                          void run(
-                            {
-                              type: 'UPDATE_REPORT',
-                              report: {
-                                ...draft,
-                                privacyReviewed: event.target.checked,
-                              },
-                            },
-                            'Saving privacy review',
-                          );
+                          void reviewPrivacy(event.target.checked);
                         }}
                       />
                       <span>

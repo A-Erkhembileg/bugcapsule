@@ -2,6 +2,8 @@
 
 ## v0.3.0 structured-engine finalization
 
+The first public Linux CI runs exposed a privacy-review checkbox that briefly reversed its state while awaiting the worker's save response. The UI now acknowledges the click immediately while export remains disabled until the saved state is confirmed. The regression test deliberately delays that save by 300 ms. The corrected build passed all 6 browser tests locally; current remote results are available in [GitHub Actions](https://github.com/A-Erkhembileg/bugcapsule/actions/workflows/ci.yml).
+
 Verified on 2026-11-02 in the Windows/Node/pnpm/Chrome environment below. The final unit suite passed **116 tests across 7 files**. Lint, strict TypeScript and production build passed. The final real-extension Playwright run passed **6 browser tests** against v0.3.0. These cover structured response/provenance/evidence display, model and retry consent, rate limits, capture/redaction/export, deletion/repeat and legacy JSON import. AI responses and native Google permission approval are mocked explicitly; the ordinary capture/browser APIs are real.
 
 The benchmark executed **25 intentional defects, all 25 reproduced**, then **50 A/B mock records, all 50 schema-valid**, with zero provider calls and no human quality grades. The review command generated 50 ungraded rows. These results establish mechanical protocol behavior, rather than Gemini accuracy. Mock API latency, token usage and estimated cost remain null. See [evaluation methodology](EVALUATION.md) and `eval/examples/finalization-mock-summary.json` for exact commands and machine-readable results.
@@ -46,7 +48,7 @@ The following table records the original v0.1.0 local-only baseline. The v0.2.0 
 | Visual inspection | Actual dark/light report editor and screenshot-review images inspected. Screenshots are checked into `docs/images/` |
 | Release packaging | Archive entries checked against the unpacked extension, with icons, MIT license and bundled dependency notices included |
 
-GitHub Actions is configured to run the checks and browser tests on Linux after publication. That remote workflow has not run in this workspace. No Chrome Web Store submission, independent security audit, screen-reader test or macOS/Linux manual smoke test is claimed.
+At the time of this original baseline, the remote workflow had not run. GitHub Actions now runs the checks and browser tests on Linux; see the current publication note above. No Chrome Web Store submission, independent security audit, screen-reader test or macOS/Linux manual smoke test is claimed.
 
 ## Acceptance workflow
 
