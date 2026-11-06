@@ -4,7 +4,7 @@ import { MAX_SCREENSHOT_LENGTH, screenshotSchema } from '../core';
 export async function captureScreenshot(api: typeof chrome, tabId: number, documentId: string) {
   const [tab] = await api.tabs.query({ active: true, currentWindow: true });
   if (tab?.id !== tabId || !tab.url || !/^https?:\/\//i.test(tab.url)) {
-    throw new Error('Open the original captured webpage and take the screenshot from its BugCapsule toolbar popup.');
+    throw new Error('Open the original captured webpage and take the screenshot from its ReproQuill toolbar popup.');
   }
   let changed = false;
   const onActivate = (active: chrome.tabs.OnActivatedInfo) => {

@@ -1,6 +1,6 @@
-# Contributing to BugCapsule
+# Contributing to ReproQuill
 
-BugCapsule is a local-first MV3 extension. Keep changes small, understandable, and testable. Discuss substantial permission, storage, or privacy changes in an issue first.
+ReproQuill is a local-first MV3 extension. Keep changes small, understandable, and testable. Discuss substantial permission, storage, or privacy changes in an issue first.
 
 ## Development
 

@@ -276,7 +276,7 @@ export function App() {
       await run(
         { type: 'DELETE_ALL' },
         'Deleting',
-        'All BugCapsule capture data deleted.',
+        'All ReproQuill capture data deleted.',
       )
     ) {
       try {
@@ -336,18 +336,18 @@ export function App() {
       }
       if (format === 'markdown')
         download(
-          'bugcapsule-report.md',
+          'reproquill-report.md',
           reportMarkdown(draft),
           'text/markdown;charset=utf-8',
         );
       if (format === 'json')
         download(
-          'bugcapsule-report.json',
+          'reproquill-report.json',
           serializeReport(draft),
           'application/json',
         );
       if (format === 'zip')
-        download('bugcapsule-report.zip', exportZip(draft), 'application/zip');
+        download('reproquill-report.zip', exportZip(draft), 'application/zip');
       setFeedback(
         `${format === 'zip' ? 'ZIP archive' : format === 'json' ? 'JSON report' : 'Markdown report'} download started.`,
       );
@@ -374,11 +374,11 @@ export function App() {
         <a
           className="brand"
           href="#workspace"
-          aria-label="BugCapsule workspace"
+          aria-label="ReproQuill workspace"
         >
           <img src="/icon.svg" alt="" />
           <span>
-            BugCapsule<span className="brand-version">LOCAL FIRST · v{appVersion}</span>
+            ReproQuill<span className="brand-version">LOCAL FIRST · v{appVersion}</span>
           </span>
         </a>
         <div className="nav-group">
@@ -856,7 +856,7 @@ export function App() {
           )}
           <footer className="content-footer">
             <span>
-              BugCapsule <span className="footer-dot">·</span> Built for better
+              ReproQuill <span className="footer-dot">·</span> Built for better
               bug reports.
             </span>
             <span>

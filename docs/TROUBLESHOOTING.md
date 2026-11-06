@@ -2,7 +2,7 @@
 
 ## Local capture
 
-Use the BugCapsule toolbar popup on an ordinary HTTP or HTTPS page. Start collection explicitly, then reproduce the defect. Errors from before Start, other frames and other tabs are outside the capture scope. Browser settings pages, extension pages and the Chrome Web Store restrict injection. After navigation or reload, begin a new capture from the destination document.
+Use the ReproQuill toolbar popup on an ordinary HTTP or HTTPS page. Start collection explicitly, then reproduce the defect. Errors from before Start, other frames and other tabs are outside the capture scope. Browser settings pages, extension pages and the Chrome Web Store restrict injection. After navigation or reload, begin a new capture from the destination document.
 
 If a screenshot fails, return to the original active document and use its toolbar popup. Tab switches or navigation during capture cause the worker to discard the pixels. Reduce the window size if the encoded screenshot exceeds the storage bound.
 
@@ -10,7 +10,7 @@ If a screenshot fails, return to the original active document and use its toolba
 
 When no key is configured, local capture and exports remain available. Enter a personal key only in Settings. A session-only key disappears when the browser session ends or the extension reloads. Choose device persistence only if its unencrypted storage is acceptable. Never put a key in a `VITE_` variable, report field or source file.
 
-For HTTP 401/403, check key restrictions, Google project eligibility and API access in Google AI Studio. Replacing the key cancels a current operation. An HTTP 404 can mean the chosen model is unavailable to the project. Select a supported model explicitly. BugCapsule does not silently switch accounts or models.
+For HTTP 401/403, check key restrictions, Google project eligibility and API access in Google AI Studio. Replacing the key cancels a current operation. An HTTP 404 can mean the chosen model is unavailable to the project. Select a supported model explicitly. ReproQuill does not silently switch accounts or models.
 
 ## Consent and permissions
 

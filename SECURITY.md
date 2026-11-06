@@ -1,10 +1,10 @@
 # Security policy
 
-BugCapsule is an early local-first extension with an optional hosted AI diagnostic. No independent security audit has been performed.
+ReproQuill is an early local-first extension with an optional hosted AI diagnostic. No independent security audit has been performed.
 
 ## Reporting a vulnerability
 
-Use GitHub's **Report a vulnerability** option on the repository Security page if private vulnerability reporting is enabled. Otherwise request a private contact channel from the maintainer through [their GitHub profile](https://github.com/A-Erkhembileg), without publishing exploit details or sensitive captures.
+Use GitHub's **Report a vulnerability** option on the repository Security page if private vulnerability reporting is enabled. Otherwise request a private contact channel from the maintainer through [their GitHub profile](https://github.com/Yamiakumi), without publishing exploit details or sensitive captures.
 
 Include the affected version, Chrome version, a minimal synthetic reproduction, expected versus observed behavior, and the potential privacy impact. Never attach real tokens, cookies, passwords, personal screenshots, or private report exports. No response-time or bounty guarantee is offered.
 
@@ -26,6 +26,6 @@ See the [threat model](docs/THREAT_MODEL.md) for controls, residual risks, and t
 
 ## Credentials and rotation
 
-BugCapsule uses a developer-focused bring-your-own-key workflow. It has no application-owned Gemini credential or authenticated backend proxy. Trusted-context browser storage narrows access to packaged extension code but cannot provide backend-equivalent secret protection. A future shared application-owned key must be held by an authenticated, rate-limited server rather than compiled into extension JavaScript.
+ReproQuill uses a developer-focused bring-your-own-key workflow. It has no application-owned Gemini credential or authenticated backend proxy. Trusted-context browser storage narrows access to packaged extension code but cannot provide backend-equivalent secret protection. A future shared application-owned key must be held by an authenticated, rate-limited server rather than compiled into extension JavaScript.
 
-If a key is exposed in a report, screenshot, repository, log or public message, revoke it in Google AI Studio or the Google Cloud console, inspect usage and billing, and create a restricted replacement. Remove it from BugCapsule and any published material. Deleting a Git commit or a downloaded report cannot revoke a credential already copied by someone else. Never include the key in a vulnerability report.
+If a key is exposed in a report, screenshot, repository, log or public message, revoke it in Google AI Studio or the Google Cloud console, inspect usage and billing, and create a restricted replacement. Remove it from ReproQuill and any published material. Deleting a Git commit or a downloaded report cannot revoke a credential already copied by someone else. Never include the key in a vulnerability report.

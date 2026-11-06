@@ -1,6 +1,6 @@
 # AI diagnostic engine
 
-BugCapsule's local capture-to-export workflow runs without a key or cloud account. AI is a separately approved operation that sends selected report text to Google Gemini.
+ReproQuill's local capture-to-export workflow runs without a key or cloud account. AI is a separately approved operation that sends selected report text to Google Gemini.
 
 ## Pipeline
 
@@ -31,7 +31,7 @@ Provenance is locally assigned for new requests. Imported metadata is user-suppl
 
 ## Models and retry consent
 
-Settings allow `gemini-3.5-flash-lite` or `gemini-3.8-flash`. The lightweight model remains the default. BugCapsule uses the selected model for the entire operation and never falls back automatically. Model access, quotas, prices and data terms depend on the user's Google project. Free-tier eligibility does not guarantee that a billing-enabled key will incur no charges.
+Settings allow `gemini-3.5-flash-lite` or `gemini-3.8-flash`. The lightweight model remains the default. ReproQuill uses the selected model for the entire operation and never falls back automatically. Model access, quotas, prices and data terms depend on the user's Google project. Free-tier eligibility does not guarantee that a billing-enabled key will incur no charges.
 
 Retries default off. Explicitly enabling retries allows at most two additional attempts for transient network/server failures or a short retryable rate limit. The transmission review states the approved maximum attempt count and model. The consent fingerprint includes the payload, model, prompt version and retry policy. A configuration or evidence change requires a new review.
 

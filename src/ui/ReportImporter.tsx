@@ -31,7 +31,7 @@ export function ReportImporter({
       setPending(restorePortableReport(JSON.parse(await file.text())));
     } catch {
       setError(
-        'This file is not a supported BugCapsule report. Check its version, field limits and diagnostic evidence references.',
+        'This file is not a supported ReproQuill report. Check its version, field limits and diagnostic evidence references.',
       );
     }
   }
@@ -52,7 +52,7 @@ export function ReportImporter({
         ref={input}
         type="file"
         accept=".json,application/json"
-        aria-label="Choose BugCapsule report JSON"
+        aria-label="Choose ReproQuill report JSON"
         data-testid="report-import-file"
         hidden
         onChange={(event) => {

@@ -48,7 +48,7 @@ export function PrivacySettings({
                 No history before you start. No other tabs or embedded frames.
               </li>
               <li>
-                No BugCapsule account, cloud report storage, or third-party
+                No ReproQuill account, cloud report storage, or third-party
                 analytics. AI diagnostics are an explicit optional action.
               </li>
               <li>No automatic screenshots or uploads.</li>

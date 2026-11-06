@@ -162,8 +162,8 @@ export class CaptureController {
     await this.api.action.setBadgeText({ text: active ? 'REC' : '' });
     await this.api.action.setTitle({
       title: active
-        ? 'BugCapsule — capture active'
-        : 'BugCapsule — capture a bug',
+        ? 'ReproQuill — capture active'
+        : 'ReproQuill — capture a bug',
     });
   }
 
@@ -225,7 +225,7 @@ export class CaptureController {
     });
     if (tab?.id === undefined || !tab.url || !/^https?:\/\//i.test(tab.url)) {
       throw new Error(
-        'Open an HTTP or HTTPS webpage, then click the BugCapsule toolbar button to grant access. Browser settings and extension pages cannot be captured.',
+        'Open an HTTP or HTTPS webpage, then click the ReproQuill toolbar button to grant access. Browser settings and extension pages cannot be captured.',
       );
     }
     const channel = crypto.randomUUID();
@@ -318,7 +318,7 @@ export class CaptureController {
     ) {
       return Promise.resolve({
         ok: false as const,
-        error: 'Only BugCapsule pages can control capture.',
+        error: 'Only ReproQuill pages can control capture.',
       });
     }
     const parsed = commandSchema.safeParse(message);

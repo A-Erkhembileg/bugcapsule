@@ -1,4 +1,4 @@
-name: Verify BugCapsule
+name: Verify ReproQuill
 
 on:
   push:

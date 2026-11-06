@@ -327,7 +327,7 @@ export class AICoordinator {
     ) {
       return {
         ok: false as const,
-        error: 'Only BugCapsule pages can access AI settings and diagnostics.',
+        error: 'Only ReproQuill pages can access AI settings and diagnostics.',
       };
     }
     const parsed = commands.safeParse(message);

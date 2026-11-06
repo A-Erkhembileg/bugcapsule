@@ -316,7 +316,7 @@ export function AIDiagnosticPanel({
             />
             <span>
               <strong>
-                I reviewed this text and allow BugCapsule to send it to Google
+                I reviewed this text and allow ReproQuill to send it to Google
                 Gemini for this diagnostic.
               </strong>
               <small>

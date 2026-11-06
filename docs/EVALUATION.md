@@ -1,6 +1,6 @@
 # Reproducible diagnostic evaluation
 
-BugCapsule includes 25 intentionally defective browser fixtures and an A/B evaluation harness. The benchmark separates mechanical protocol correctness from diagnostic quality. Successful mock runs establish reproducibility, payload selection and schema/reference handling. They provide no evidence that Gemini identified a cause or suggested a useful fix.
+ReproQuill includes 25 intentionally defective browser fixtures and an A/B evaluation harness. The benchmark separates mechanical protocol correctness from diagnostic quality. Successful mock runs establish reproducibility, payload selection and schema/reference handling. They provide no evidence that Gemini identified a cause or suggested a useful fix.
 
 ## Dataset and capture
 
@@ -34,7 +34,7 @@ Capture failures retain their exception or failed assertion, report when availab
 | Condition | Supplied model evidence |
 | --- | --- |
 | A, minimally structured baseline | Individual sanitized error records, including genuine identifiers and timestamps. Report prose and interaction timeline are omitted |
-| B, BugCapsule pipeline | Production redaction and evidence selection, grouped repeated errors with genuine ID aliases, a bounded generic timeline, reproduction steps and user-visible report context |
+| B, ReproQuill pipeline | Production redaction and evidence selection, grouped repeated errors with genuine ID aliases, a bounded generic timeline, reproduction steps and user-visible report context |
 
 Both conditions use the same captured report, selected model, prompt version and structured response schema. Retrying is disabled for the evaluation. Request order is counterbalanced A/B then B/A across fixtures. This compares the combined filtering/context treatment rather than isolating every individual design choice. A factorial ablation study would be needed to attribute improvements to deduplication, context or timeline separately.
 

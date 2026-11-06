@@ -1,6 +1,6 @@
 # Architecture
 
-BugCapsule is a TypeScript/React Manifest V3 extension built with Vite and CRXJS. The included demo is a separate static local HTTP server. There is no application server or database.
+ReproQuill is a TypeScript/React Manifest V3 extension built with Vite and CRXJS. The included demo is a separate static local HTTP server. There is no application server or database.
 
 ```text
 Toolbar popup / full editor (React)

@@ -240,7 +240,7 @@ export function AISettings({ disabled }: { disabled: boolean }) {
         </label>
         <p className="ai-storage-note">
           Model availability, quotas and pricing depend on your Google project.
-          A billing-enabled key may incur charges. BugCapsule uses the selected
+          A billing-enabled key may incur charges. ReproQuill uses the selected
           model and never switches models automatically.
         </p>
         <label className="check-label ai-remember-label">

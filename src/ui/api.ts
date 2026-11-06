@@ -46,7 +46,7 @@ type AIRequest =
 
 export async function aiRequest<T>(message: AIRequest): Promise<T> {
   if (!globalThis.chrome?.runtime?.id) {
-    throw new Error('Open BugCapsule from the installed browser extension.');
+    throw new Error('Open ReproQuill from the installed browser extension.');
   }
   const response: unknown = await chrome.runtime.sendMessage(message);
   if (!response || typeof response !== 'object' || !('ok' in response)) {
@@ -72,7 +72,7 @@ export async function aiRequest<T>(message: AIRequest): Promise<T> {
 export async function request(message: Request): Promise<CaptureState> {
   if (!globalThis.chrome?.runtime?.id) {
     throw new Error(
-      'Open BugCapsule from the installed browser extension. This editor requires Chrome extension APIs.',
+      'Open ReproQuill from the installed browser extension. This editor requires Chrome extension APIs.',
     );
   }
   const response: unknown = await chrome.runtime.sendMessage(message);

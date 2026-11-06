@@ -1,10 +1,12 @@
-# BugCapsule
+# ReproQuill
 
 **Capture bugs. Share context. Reproduce faster.**
 
-BugCapsule is a local-first Chrome extension for writing reproducible bug reports. Start it on the affected page, trigger the bug, and save a report with the steps, browser context, new errors, and an optional redacted screenshot. An optional Gemini diagnostic can suggest debugging hypotheses after you review and approve the text sent to Google. A developer can read the exported Markdown or JSON without installing the extension.
+ReproQuill is a local-first Chrome extension for writing reproducible bug reports. Start it on the affected page, trigger the bug, and save a report with the steps, browser context, new errors, and an optional redacted screenshot. An optional Gemini diagnostic can suggest debugging hypotheses after you review and approve the text sent to Google. A developer can read the exported Markdown or JSON without installing the extension.
 
-![BugCapsule dashboard with capture controls and an empty report workspace](docs/images/dashboard.png)
+The project launched as BugCapsule. [GitHub repository](https://github.com/Yamiakumi/reproquill)
+
+![ReproQuill dashboard with capture controls and an empty report workspace](docs/images/dashboard.png)
 
 ## Install the unpacked extension
 
@@ -18,21 +20,21 @@ If you already have a built `dist` directory, skip directly to step 2.
    ```
 
 2. Open `chrome://extensions`, enable **Developer mode**, select **Load unpacked**, and choose **`dist/`**, the directory containing the generated `manifest.json`.
-3. Pin **BugCapsule** from Chrome’s Extensions menu. Open a normal HTTP or HTTPS webpage. Clicking the toolbar icon opens the dashboard. Recording begins only when you press **Start capture**.
+3. Pin **ReproQuill** from Chrome’s Extensions menu. Open a normal HTTP or HTTPS webpage. Clicking the toolbar icon opens the dashboard. Recording begins only when you press **Start capture**.
 
-The manifest targets Chrome 120 or later. Build dependencies require an initial download. The capture, editor, export and local demo work offline. The optional AI diagnostic requires internet access and your own Gemini API key. No `.env` file or BugCapsule backend is required.
+The manifest targets Chrome 120 or later. Build dependencies require an initial download. The capture, editor, export and local demo work offline. The optional AI diagnostic requires internet access and your own Gemini API key. No `.env` file or ReproQuill backend is required.
 
 ## Reproduce a bug in the demo
 
 1. Run `pnpm demo` and open [the local playground](http://127.0.0.1:4173). The demo binds only to the loopback interface.
-2. Click the BugCapsule toolbar icon. Optionally select **Include safe interaction timeline**, then **Start capture**. The toolbar badge reads **REC**.
+2. Click the ReproQuill toolbar icon. Optionally select **Include safe interaction timeline**, then **Start capture**. The toolbar badge reads **REC**.
 3. Return to the page and click **Save draft**. The interface stays on “Saving…” and raises an uncaught JavaScript error. **Try checkout** produces a rejected promise. **Log sample error** tests redaction with synthetic data. **Add item → Remove item** reproduces a stale cart count without a JavaScript exception.
-4. Reopen BugCapsule on the demo tab. Click **Screenshot** to capture its visible viewport, then **Stop capture**. The optional **Open editor** button gives you a full browser tab for editing.
+4. Reopen ReproQuill on the demo tab. Click **Screenshot** to capture its visible viewport, then **Stop capture**. The optional **Open editor** button gives you a full browser tab for editing.
 5. Enter a bug title, expected and actual behavior, and one reproduction step per line. In **Evidence**, edit or remove events. To redact the screenshot, drag a rectangle or enter pixel coordinates, then choose **Apply redaction**. Repeat for other areas. **Save changes** commits the new image and report.
 6. Inspect **Preview**, then select **I reviewed the report and screenshot for private information**. Download **Markdown**, **JSON**, or **Export ZIP**. A content change clears the review, so review again after editing.
 7. Select **Delete** and confirm **Delete all data**. Return to the demo page and start a second capture. Files already downloaded remain on your computer.
 
-![BugCapsule report editor populated from the local demonstration](docs/images/report-editor.png)
+![ReproQuill report editor populated from the local demonstration](docs/images/report-editor.png)
 
 ![Screenshot review with opaque redaction and keyboard coordinate controls](docs/images/screenshot-review.png)
 
@@ -57,12 +59,12 @@ The manifest targets Chrome 120 or later. Build dependencies require an initial 
 
 | Permission | Purpose |
 | --- | --- |
-| `activeTab` | Chrome grants temporary access when the user invokes BugCapsule on a tab. The extension uses it to capture that document and take an explicitly requested screenshot |
+| `activeTab` | Chrome grants temporary access when the user invokes ReproQuill on a tab. The extension uses it to capture that document and take an explicitly requested screenshot |
 | `scripting` | Installs and removes observers in the main frame after Start. The main-world hook can observe the page’s own console errors |
 | `storage` | Holds one current capture in trusted extension session storage, across popup closes and service-worker restarts |
 | Optional Google host access | Requested when you explicitly send an AI diagnostic. Allows requests only to `https://generativelanguage.googleapis.com/` |
 
-BugCapsule requests no website-wide host access. It has no analytics, cookie access or request inspection. The Google endpoint is used only for explicitly approved AI analysis. Report data clears when the browser session ends or the extension reloads. Export anything you want to keep. Theme and model/retry preferences persist. You may explicitly choose to remember your own API key on the device.
+ReproQuill requests no website-wide host access. It has no analytics, cookie access or request inspection. The Google endpoint is used only for explicitly approved AI analysis. Report data clears when the browser session ends or the extension reloads. Export anything you want to keep. Theme and model/retry preferences persist. You may explicitly choose to remember your own API key on the device.
 
 - **Capture has a start and end.** Earlier errors, other tabs, iframes, workers, network logs and arbitrary console objects are outside its scope. Reloading, closing or navigating the document ends collection. Same-document `hashchange` and `popstate` events are observable. SPA navigation coverage is partial.
 - **Capture is bounded.** A session lasts up to 15 minutes and 200 events. High-frequency events may be dropped. Messages are capped at 2,000 characters and stacks at 4,000. If the screenshot exceeds the 2,000,000-character encoded size limit, reduce the browser window size and retake it.
@@ -79,7 +81,7 @@ Read the [threat model](docs/THREAT_MODEL.md) and [security policy](SECURITY.md)
 4. Explicitly approve sending the reviewed text and grant the optional Google host permission when Chrome asks. The screenshot, API key, previous AI output and full report attachment are excluded from the diagnostic payload. Text, script paths and user-written steps may still contain private information that automatic redaction cannot recognize.
 5. Read the summary, observations and expandable hypotheses. Follow evidence references to the captured events and copy debugging steps when useful. Structured provenance records the model, prompt version, timestamp and evidence IDs. Remove an unwanted analysis, then complete ordinary privacy review again before exporting. Legacy free-form analysis remains editable. Editing underlying bug evidence invalidates prior analysis.
 
-Both configured model identifiers are listed as stable by Google. Free-tier access depends on project eligibility and quotas. A billing-enabled key can incur charges. Google's free-tier terms allow inputs and outputs to improve products. Check current provider terms before sending confidential material. BugCapsule never switches models automatically. [Lightweight model](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite), [Flash model](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash), [pricing and data use](https://ai.google.dev/gemini-api/docs/pricing).
+Both configured model identifiers are listed as stable by Google. Free-tier access depends on project eligibility and quotas. A billing-enabled key can incur charges. Google's free-tier terms allow inputs and outputs to improve products. Check current provider terms before sending confidential material. ReproQuill never switches models automatically. [Lightweight model](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite), [Flash model](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash), [pricing and data use](https://ai.google.dev/gemini-api/docs/pricing).
 
 Automatic retries are disabled by default. You can explicitly enable up to two additional attempts for transient failures in Settings, then approve that attempt limit in the transmission review. Exponential backoff, jitter and the provider's `Retry-After` header operate within a 25-second overall deadline. Authentication errors are not retried. A longer quota wait produces an error and requires a later explicit request. Closing the popup does not own the job. A worker restart safely marks an unfinished operation interrupted and never resends it automatically. You can keep editing and exporting locally throughout.
 
@@ -95,7 +97,7 @@ This screenshot uses a synthetic test response. Current executed checks are reco
 
 ## Reproducible evaluation
 
-The evaluation tooling compares a minimal-error baseline with BugCapsule's evidence-selection pipeline using reproducible synthetic defects. Both conditions use the same model and structured response format. Mock runs validate the experiment machinery. Live model quality requires an explicitly authorized live run followed by documented human review. The known causes are withheld from model input. See the [evaluation methodology](docs/EVALUATION.md) for fixture reproduction, A/B commands, scoring, costs and limitations.
+The evaluation tooling compares a minimal-error baseline with ReproQuill's evidence-selection pipeline using reproducible synthetic defects. Both conditions use the same model and structured response format. Mock runs validate the experiment machinery. Live model quality requires an explicitly authorized live run followed by documented human review. The known causes are withheld from model input. See the [evaluation methodology](docs/EVALUATION.md) for fixture reproduction, A/B commands, scoring, costs and limitations.
 
 ## Development and verification
 
@@ -107,6 +109,6 @@ pnpm test:e2e                      # loads the built MV3 extension and starts th
 
 The project uses React, TypeScript, Vite, CRXJS, Tailwind CSS, Zod and fflate. Source code separates the UI, service worker, isolated content bridge, page instrumentation, privacy filters and report exporters. There is an [architecture guide](docs/ARCHITECTURE.md), a [record of executed checks](docs/VERIFICATION.md), a [roadmap](docs/ROADMAP.md) and [contribution instructions](CONTRIBUTING.md).
 
-BugCapsule is licensed under [MIT](LICENSE). Bundled third-party components retain their own licenses.
+ReproQuill is licensed under [MIT](LICENSE). Bundled third-party components retain their own licenses.
 
 See the verification record for executed checks, the distinction between mocked AI tests and a real provider request, and remaining manual checks. Run `pnpm package` to produce a distributable ZIP. Repository publication instructions are in [publishing](docs/PUBLISHING.md).

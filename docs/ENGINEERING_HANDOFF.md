@@ -1,4 +1,4 @@
-# Engineering handoff — BugCapsule v0.3.0
+# Engineering handoff — ReproQuill v0.3.0
 
 ## Delivered architecture
 

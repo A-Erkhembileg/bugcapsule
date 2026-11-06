@@ -10,7 +10,7 @@ const icons = {
 
 export default defineManifest({
   manifest_version: 3,
-  name: 'BugCapsule',
+  name: 'ReproQuill',
   version: project.version,
   description: 'Capture bugs. Share context. Reproduce faster. Privacy-first, local bug reports.',
   minimum_chrome_version: '120',
@@ -19,12 +19,12 @@ export default defineManifest({
   icons,
   action: {
     default_popup: 'index.html',
-    default_title: 'BugCapsule — capture a bug',
+    default_title: 'ReproQuill — capture a bug',
     default_icon: icons,
   },
   background: { service_worker: 'src/background/index.ts', type: 'module' },
   commands: {
-    _execute_action: { suggested_key: { default: 'Alt+Shift+B' }, description: 'Open BugCapsule' },
+    _execute_action: { suggested_key: { default: 'Alt+Shift+B' }, description: 'Open ReproQuill' },
   },
   content_security_policy: {
     extension_pages: "script-src 'self'; object-src 'none'; base-uri 'none'; connect-src https://generativelanguage.googleapis.com",

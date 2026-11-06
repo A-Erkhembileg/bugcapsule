@@ -23,6 +23,6 @@ async function addDirectory(directory) {
 
 await addDirectory(extension);
 await mkdir('release', { recursive: true });
-const output = join('release', `bugcapsule-${manifest.version}.zip`);
+const output = join('release', `reproquill-${manifest.version}.zip`);
 await writeFile(output, zipSync(files, { level: 9 }));
 console.log(`Packaged ${Object.keys(files).length} extension files in ${output}`);

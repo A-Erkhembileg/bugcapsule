@@ -127,7 +127,7 @@ export function previewReportMarkdown(input: Report): string {
   const lines = [
     `# ${text(report.title || 'Untitled bug report')}`,
     '',
-    '> Captured with BugCapsule · Capture bugs. Share context. Reproduce faster.',
+    '> Captured with ReproQuill · Capture bugs. Share context. Reproduce faster.',
     '',
     '## Description',
     '',

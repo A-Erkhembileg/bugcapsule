@@ -314,7 +314,7 @@ async function configureKey(remember = false) {
 }
 
 const consentLabel =
-  'I reviewed this text and allow BugCapsule to send it to Google Gemini for this diagnostic.';
+  'I reviewed this text and allow ReproQuill to send it to Google Gemini for this diagnostic.';
 
 test('mocked Gemini stays opt-in, excludes private attachments, and saves reviewable analysis in exports', async () => {
   await stoppedReport();

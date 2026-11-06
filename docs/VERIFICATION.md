@@ -1,8 +1,12 @@
 # Verification record
 
+## ReproQuill branding refresh
+
+Verified on 2026-11-06. Source lint, strict TypeScript, the production build, 116 unit tests, and 6 browser tests passed. The browser run used a temporary Chrome profile and synthetic demo data to refresh the screenshots in `docs/images/`. The local package is `release/reproquill-0.3.0.zip`.
+
 ## v0.3.0 structured-engine finalization
 
-The first public Linux CI runs exposed a privacy-review checkbox that briefly reversed its state while awaiting the worker's save response. The UI now acknowledges the click immediately while export remains disabled until the saved state is confirmed. The regression test deliberately delays that save by 300 ms. The corrected build passed all 6 browser tests locally; current remote results are available in [GitHub Actions](https://github.com/A-Erkhembileg/bugcapsule/actions/workflows/ci.yml).
+The first public Linux CI runs exposed a privacy-review checkbox that briefly reversed its state while awaiting the worker's save response. The UI now acknowledges the click immediately while export remains disabled until the saved state is confirmed. The regression test deliberately delays that save by 300 ms. The corrected build passed all 6 browser tests locally. [Current GitHub Actions results](https://github.com/Yamiakumi/reproquill/actions/workflows/ci.yml)
 
 Verified on 2026-11-02 in the Windows/Node/pnpm/Chrome environment below. The final unit suite passed **116 tests across 7 files**. Lint, strict TypeScript and production build passed. The final real-extension Playwright run passed **6 browser tests** against v0.3.0. These cover structured response/provenance/evidence display, model and retry consent, rate limits, capture/redaction/export, deletion/repeat and legacy JSON import. AI responses and native Google permission approval are mocked explicitly; the ordinary capture/browser APIs are real.
 
@@ -10,7 +14,7 @@ The benchmark executed **25 intentional defects, all 25 reproduced**, then **50 
 
 Independent review identified two additional cleanup edges that were repaired: cancelling HTTP error response bodies before retry, and preventing cancellation/deletion from intentionally recreating a quota cooldown. A regression verifies body cleanup. Credential audits, version migrations, import image limits, evidence-reference rejection, retry jitter and worker interruption are covered by the audit and test suites.
 
-The current packaged artifact is `release/bugcapsule-0.3.0.zip`. Manual live-provider approval and native permission checks remain listed below; no real Google request, model-quality score or paid usage is claimed. [Engineering handoff](ENGINEERING_HANDOFF.md).
+Manual live-provider approval and native permission checks remain listed below; no real Google request, model-quality score or paid usage is claimed. [Engineering handoff](ENGINEERING_HANDOFF.md).
 
 The following sections retain the earlier release baselines for traceability. The v0.3.0 results above supersede their counts and free-form response scope.
 
